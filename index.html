@@ -27,6 +27,7 @@
   <div id="title" class="slide header">
     <h1 style="height: 800px; font-family: Spartan;">Turtle Games</h1>
   </div>
+  <button onclick="themeToggle()">Darkmode</button>
   <h1 style="font-size: 45px; text-align: center;  font-family: Spartan;">Games</h1>
 <body style="text-align: center; font-size: 21px; font-family: Roboto Condensed">
   <!-- Games Images Start -->
@@ -278,9 +279,43 @@ div.item {
     /* Make the caption a block so it occupies its own line. */
     display: block;
 } 
+/* darkmode */
+.dark-mode {
+        background-color: black;
+        color: white;
+      }
 </style>
   <h3>From Pirate Games Studio</h3>
 </div>
 
 </div>
+<script>
+  function themeToggle() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+  }
+  // On page load set the theme.
+(function() {
+  let onpageLoad = localStorage.getItem("theme") || "";
+  let element = document.body;
+  element.classList.add(onpageLoad);
+  document.getElementById("theme").textContent =
+    localStorage.getItem("theme") || "light";
+})();
+
+function themeToggle() {
+  let element = document.body;
+  element.classList.toggle("dark-mode");
+
+  let theme = localStorage.getItem("theme");
+  if (theme && theme === "dark-mode") {
+    localStorage.setItem("theme", "");
+  } else {
+    localStorage.setItem("theme", "dark-mode");
+  }
+
+  document.getElementById("theme").textContent = localStorage.getItem("theme");
+}
+
+</script>
 
