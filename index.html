@@ -12,7 +12,7 @@
       href="https://www.digitalocean.com/?refcode=ca56b0989c47&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img
         src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
         <a
-          href="https://pirategamesstudio.github.io/"><img
+          href="https://pirategamesstudio.github.io/"><img id="pb-1"
             src="img/poweredby.png" alt="Powered By Pirate Games Studio" /></a>
   <!-- Games Images Start -->
   <div class="games">
@@ -350,7 +350,9 @@ div.item {
       a {
         color: green;
       }
-      
+      #pb-1 {
+
+      }
 </style>
   <h3>From Pirate Games Studio</h3>
 </div>
@@ -384,6 +386,10 @@ div.item {
 </head>
 
 <script>
+  function themeToggle() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
   // On page load set the theme.
 (function() {
   let onpageLoad = localStorage.getItem("theme") || "";
@@ -419,4 +425,3 @@ snowStorm.snowColor = '#fff';
 </script>
 
 <script src="snowstorm-min.js"></script>
-<script src="darkmode.js"></script>
