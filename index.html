@@ -362,14 +362,14 @@ height: 65;
       *, *:after, *:before {
 	 box-sizing: border-box;
 }
- input[type="checkbox"] {
+.dmbutton input[type="checkbox"] {
 	 visibility: hidden;
 }
- input[type="checkbox"]:checked + label {
+ .dmbutton input[type="checkbox"]:checked + label {
 	 transform: rotate(360deg);
 	 background-color: #000;
 }
- input[type="checkbox"]:checked + label:before {
+ .dmbutton input[type="checkbox"]:checked + label:before {
 	 transform: translateX(90px);
 	 background-color: #fff;
 }
@@ -384,7 +384,7 @@ height: 65;
 	 transform-origin: 50% 50%;
 	 cursor: pointer;
 }
- label:before {
+ .dmbutton label:before {
 	 transition: transform 0.75s ease;
 	 transition-delay: 0.5s;
 	 content: "";
