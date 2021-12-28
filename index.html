@@ -2,18 +2,18 @@
   <div id="title" class="slide header">
     <h1 style="height: 800px; font-family: Spartan;">Turtle Games</h1>
   </div> 
-  <div id="dmbutton"><button onclick="themeToggle()">Darkmode</button></div>
-  <h2>Click <a href="https://forms.gle/eupsTKAzLYQLUWRE6">Here</a> to take the survey</h2>
+  <a
+    href="https://www.digitalocean.com/?refcode=ca56b0989c47&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img
+      src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
+  <a href="https://pirategamesstudio.github.io/"><img id="pb-1" src="img/poweredby.svg"
+      alt="Powered By Pirate Games Studio" /></a>
+  <h2>Darkmode Toggle</h2>
+  <div class="dmbutton"><input onclick="themeToggle()" type="checkbox" id="toggle" />
+  <label for="toggle"></label></div>
   <h1 style="font-size: 45px; text-align: center;  font-family: Spartan;">Games</h1>
 <body style="text-align: center; font-size: 21px; font-family: Roboto Condensed">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5417572481469038"
      crossorigin="anonymous"></script>
-    <a
-      href="https://www.digitalocean.com/?refcode=ca56b0989c47&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img
-        src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
-        <a
-          href="https://pirategamesstudio.github.io/"><img id="pb-1"
-            src="img/poweredby.svg" alt="Powered By Pirate Games Studio" /></a>
   <!-- Games Images Start -->
   <div class="games">
     <div class="item">
@@ -280,7 +280,7 @@
           </a>
         </div>
          <!-- Keyboard Games End -->
-     <h1>Go to the <a href="https://store.turtlegames.org/">Store</a></h1>
+     <h1>Go to the <a href="/Store/">Store</a></h1>
         <!-- begin wwww.htmlcommentbox.com -->
  <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Form</a> is loading comments...</div>
  <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
@@ -355,6 +355,49 @@ border-radius: 3%;
 width: 250;
 height: 65;
       }
+      *, *:after, *:before {
+	 box-sizing: border-box;
+}
+ input[type="checkbox"] {
+	 visibility: hidden;
+}
+ input[type="checkbox"]:checked + label {
+	 transform: rotate(360deg);
+	 background-color: #000;
+}
+ input[type="checkbox"]:checked + label:before {
+	 transform: translateX(90px);
+	 background-color: #fff;
+}
+ label {
+	 display: flex;
+	 width: 150px;
+	 height: 60px;
+	 border: 6px solid;
+	 border-radius: 99em;
+	 position: relative;
+	 transition: transform 0.75s ease-in-out;
+	 transform-origin: 50% 50%;
+	 cursor: pointer;
+}
+ label:before {
+	 transition: transform 0.75s ease;
+	 transition-delay: 0.5s;
+	 content: "";
+	 display: block;
+	 position: absolute;
+	 width: 24px;
+	 height: 24px;
+	 background-color: #fff;
+	 border-radius: 50%;
+	 top: 12px;
+	 left: 12px;
+}
+.dmbutton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 </style>
   <h3>From Pirate Games Studio</h3>
 </div>
@@ -385,6 +428,7 @@ height: 65;
   })();
 </script>
 <!-- End Matomo Code -->
+
 </head>
 
 <script>
@@ -415,5 +459,4 @@ function themeToggle() {
   document.getElementById("theme").textContent = localStorage.getItem("theme");
 }
 </script>
-
 
