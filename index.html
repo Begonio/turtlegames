@@ -294,155 +294,6 @@
 <a href="https://www.instagram.com/turtlgamesdotorg/" class="fa fa-instagram"></a>
 <a href="https://www.reddit.com/r/funturtlegames/" class="fa fa-reddit"></a>
 <h3>Powered by Pirate Games Studio</h3>
-<style>
-  /* Fonts Import Start */
-  @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Spartan:wght@700&display=swap');
-   /* Fonts Import End */
-   
-   .item img {
-    border-radius: 3%;
-   }
- /* Title Text and image */
-#title {
-background-image: url("img/h1background.png");
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0px;
-  border-radius: 1%;
-font-size: 45px;
-color: white;
-
-}
-@media only screen and (max-device-width: 1366px) {
-  #title {
-    background-attachment: scroll;
-  }
-}
-#title h1 {
-transform: translateZ(.25px) scale(.75);
-transform-origin: 50% 100%;
-}
-.item {
-  display: grid;
-}
-div.item {
-    /* To correctly align image, regardless of content height: */
-    vertical-align: top;
-    display: inline-block;
-    /* To horizontally center images and caption */
-    text-align: center;
-    /* The width of the container also implies margin around the images. */
-    width: 188px;
-    margin-bottom: 30px;
-    margin-left: 10px;
-}
-/* Keep Images correct size*/
-.item img {
-    width: 188px;
-    height: 188px;
-}
-.caption {
-    /* Make the caption a block so it occupies its own line. */
-    display: block;
-} 
-/* darkmode */
-.dark-mode {
-        background-color: black;
-        color: white;
-      }
-      /* <a> class color */
-      a {
-        color: green;
-      }
-      #pb-1 {
-border-radius: 3%;
-width: 250;
-height: 65;
-      }
-      *, *:after, *:before {
-	 box-sizing: border-box;
-}
-.dmbutton input[type="checkbox"] {
-	 visibility: hidden;
-}
- .dmbutton input[type="checkbox"]:checked + label {
-	 transform: rotate(360deg);
-	 background-color: #000;
-}
-
- .dmbutton input[type="checkbox"]:checked + label:before {
-	 transform: translateX(90px);
-	 background-color: #fff; 
-} 
- .dmbutton label {
-	 display: flex;
-	 width: 150px;
-	 height: 60px;
-	 border: 6px solid;
-	 border-radius: 99em;
-	 position: relative;
-	 transition: transform 0.75s ease-in-out;
-	 transform-origin: 50% 50%;
-	 cursor: pointer;
-} 
- .dmbutton label:before {
-	 transition: transform 0.75s ease;
-	 transition-delay: 0.5s;
-	 content: "";
-	 display: block;
-	 position: absolute;
-	 width: 24px;
-	 height: 24px;
-	 background-color: #000;
-	 border-radius: 50%;
-	 top: 12px;
-	 left: 12px;
-} 
-.dmbutton {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  width: 70px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-  border-radius: 3%;
-}
-
-.fa:hover {
-    opacity: 0.7;
-}
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
-}
-
-
-.fa-youtube {
-  background: #bb0000;
-  color: white;
-}
-
-.fa-instagram {
-  background: #125688;
-  color: white;
-}
-
-.fa-reddit {
-  background: #ff5700;
-  color: white;
-}
-
-</style>
 </div>
 </div>
 <meta charset="UTF-8" />
@@ -452,6 +303,7 @@ height: 65;
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <head>
+	<link rel="stylesheet" href="style.css">
   <!--Google Adsense-->
   <script data-ad-client="ca-pub-5417572481469038" async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -473,32 +325,6 @@ height: 65;
 
 </head>
 
-<script>
-  function themeToggle() {
-      var element = document.body;
-      element.classList.toggle("dark-mode");
-    }
-  // On page load set the theme.
-(function() {
-  let onpageLoad = localStorage.getItem("theme") || "";
-  let element = document.body;
-  element.classList.add(onpageLoad);
-  document.getElementById("theme").textContent =
-    localStorage.getItem("theme") || "light";
-})();
-
-function themeToggle() {
-  let element = document.body;
-  element.classList.toggle("dark-mode");
-
-  let theme = localStorage.getItem("theme");
-  if (theme && theme === "dark-mode") {
-    localStorage.setItem("theme", "");
-  } else {
-    localStorage.setItem("theme", "dark-mode");
-  }
-
-  document.getElementById("theme").textContent = localStorage.getItem("theme");
-}
+<script src="Script.js">
 </script>
 
