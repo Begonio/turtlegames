@@ -6,6 +6,10 @@
    .item img {
     border-radius: 3%;
    }
+   .forums-banner {
+     background-color: #7cae84;
+     border-radius: 3px;
+   }
  /* Title Text and image */
 #title {
 background-image: url("img/h1background.png");
@@ -60,7 +64,7 @@ div.item {
       }
       /* <a> class color */
       a {
-        color: green;
+        color: #008037;
       }
       #pb-1 {
 border-radius: 3%;
