@@ -1,15 +1,92 @@
   /* Fonts Import Start */
   @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Spartan:wght@700&display=swap');
-   /* Fonts Import End */
-   
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+/* Fonts Import End */
+.navbuttons {
+  text-align: right;
+}
+
+.nav {
+  position: absolute;
+  text-align: center;
+}
+  header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0.5rem 1.5rem;
+  }
+
+  a,
+ .nav button {
+    color: white;
+    align-items: right;
+  }
+
+  .image-clickable {
+    margin-right: auto;
+  }
+
+  .logo {
+    height: 4.2rem;
+    margin-right: auto;
+  }
+
+  .nav-links {
+    list-style: none;
+  }
+
+.nav-links li a {
+color: white;
+font-size: 35px;
+}
+.nav-links li a img {
+  height: 35px;
+}
+
+  .nav-links li {
+    display: inline-block;
+    padding: 0 1.25rem;
+  }
+
+  .nav-links li a {
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    transition: all 0.5s ease 0s;
+  }
+
+  .nav-links li a:hover {
+    color: #9999CC;
+  }
+
+ .nav button {
+    background: #04bd70;
+    cursor: pointer;
+    padding: 9px 20px;
+    border: none;
+    border-radius: 50px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    transition: all 0.5s ease 0s;
+    margin-left: 20px;
+  }
+
+  .nav button:hover {
+    background: #9999CC;
+  }
+
+   html {
+     scroll-behavior: smooth;
+   }
+  body {
+    margin: 0px;
+  }
    .item img {
     border-radius: 3%;
    }
-   .forums-banner {
-     background-color: #7cae84;
-     border-radius: 3px;
-   }
+
  /* Title Text and image */
 #title {
 background-image: url("img/h1background.webp");
@@ -20,7 +97,6 @@ background-image: url("img/h1background.webp");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0px;
-  border-radius: 1%;
 font-size: 45px;
 color: white;
 
@@ -121,7 +197,6 @@ height: 65;
   width: 70px;
   text-align: center;
   text-decoration: none;
-  margin: 5px 2px;
   border-radius: 3%;
 }
 
