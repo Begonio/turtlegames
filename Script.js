@@ -24,3 +24,12 @@ function themeToggle() {
 
   document.getElementById("theme").textContent = localStorage.getItem("theme");
 }
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
