@@ -1,9 +1,7 @@
-  @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Spartan:wght@700&display=swap');
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 body {
   margin: 0;
-  font-family: Roboto Condensed;
+  font-family: 'Roboto Condensed',
+  sans-serif;
 }
 
 html {
@@ -52,15 +50,21 @@ a {
       }
       #pb-1 {
 border-radius: 3%;
-width: 250;
-height: 65;
+width: 200;
+height: 60;
 margin-top: 0px;
+      }
+      #pb-2 {
+        width: 200;
+        height: 60;
+        margin-top: 0px;
       }
      
 .dmbutton button{
 height: 50px;
 width: 100px;
 background-color: #008037;
-font-family: Spartan;
+font-family: 'Spartan',
+sans-serif;
 margin-top: 15px;
 }
