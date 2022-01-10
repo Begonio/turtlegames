@@ -8,16 +8,18 @@ body {
 
 html {
      scroll-behavior: smooth;
+     background-color: #ffffff;
    }
 .item img {
     border-radius: 3%;
    }
 #title {
-background-image: url("img/h1background.webp");
 background-size: cover;
 margin: 0px;
 font-size: 45px;
 color: white;
+height: 855px;
+background-image: url(/img/h1background.webp);
 }
 
 #title h1 {
@@ -43,29 +45,16 @@ div.item {
     display: block;
 } 
 .dark-mode {
-        background-color: black;
+       background-color: #000000;
         color: white;
       }
-
 a {
   color: #008037;
-      }
-      #pb-1 {
-border-radius: 3%;
-width: 200;
-height: 60;
-margin-top: 0px;
-      }
-      #pb-2 {
-        width: 200;
-        height: 60;
-        margin-top: 0px;
-      }
-     
+      }  
 .dmbutton button{
 height: 50px;
-width: 100px;
-background-color: #008037;
+width: 300px;
+background-image: linear-gradient(to bottom right, #0fcf62, #163fd4);
 font-family: 'Spartan',
 sans-serif;
 margin-top: 15px;
