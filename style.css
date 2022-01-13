@@ -1,19 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+.h1-games {
+ font-size: 45px; 
+ text-align: center;  
+ font-family: Spartan;
+}
+.h1-title {
+height: 855px;
+font-family: 'Spartan', sans-serif;
+margin: 0px;
+}
+.poweredby-a {
+  color: red;
+}
 body {
   margin: 0;
   font-family: 'Roboto Condensed',
   sans-serif;
 }
-
-html {
-     scroll-behavior: smooth;
-     background-color: #ffffff;
-   }
 .item img {
     border-radius: 3%;
    }
-#title {
+.title {
 background-size: cover;
 margin: 0px;
 font-size: 45px;
@@ -22,7 +30,7 @@ height: 855px;
 background-image: url(/img/h1background.webp);
 }
 
-#title h1 {
+.title h1 {
 transform: translateZ(.25px) scale(.75);
 transform-origin: 50% 100%;
 }
@@ -59,4 +67,8 @@ font-family: 'Spartan',
 sans-serif;
 margin-top: 15px;
 color: black;
+}
+.contact {
+  font-family: spartan;
+  font-size: 60px;
 }
