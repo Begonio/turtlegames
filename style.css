@@ -44,6 +44,10 @@ div.item {
     width: 188px;
     margin-bottom: 30px;
     margin-left: 10px;
+    flex: 1 1 auto;
+    margin-right: 5px;
+    margin-left: 5px;
+
 }
 .item img {
     width: 188px;
