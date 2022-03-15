@@ -1,0 +1,4 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+16:49:26	9054/9054	---MCZ	200	added ('OK')	text/html	date:Tue,%2015%20Mar%202022%2023:49:27%20GMT	https://games.crazygames.com/en_US/4-colors-pgs/index.html	C:/My%20Web%20Sites/4cc/games.crazygames.com/en_US/4-colors-pgs/index.html	(from )
+16:49:26	21/21	---M--	404	error ('Not%20Found')	application/json	etag:W/%2215-5KajTCx0AJD0xogoSeOjjV2M8K0%22	https://games.crazygames.com/robots.txt		(from )
+16:49:26	717635/717635	---M-Z	200	added ('OK')	text/javascript	date:Mon,%2014%20Mar%202022%2008:25:52%20GMT	https://gameframe.crazygames.com/crazygames-gameframe-v1.bundle.js	C:/My%20Web%20Sites/4cc/gameframe.crazygames.com/crazygames-gameframe-v1.bundle.js	(from https://games.crazygames.com/en_US/4-colors-pgs/index.html)
