@@ -1,13 +1,12 @@
-
 <!--Full screen on ios-->
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Uno</title>
-<iframe src="https://scuffeduno.online/game"
+<title>Slope Mobile</title>
+<iframe src="https://slopegame3d.com/slope.embed"
 frameborder="0" 
 marginheight="0" 
 marginwidth="0" 
-width="100%" 
-height="100%" 
+width="1080px" 
+height="720px" 
 scrolling="auto"></iframe >
 <style>
 html 
@@ -19,18 +18,32 @@ html, body, div, iframe
 {
 margin: 0px; 
 padding: 0px; 
-height: 100%; 
+height: 720px; 
 border: none;
 }
 iframe 
 {
 display: block; 
-width: 100%; 
+width: 1080px; 
 border: none; 
 overflow-y: auto; 
 overflow-x: hidden;
 }
-</style>>
+@media (max-width: 1000px) {
+
+      html, body, div, iframe {
+            height: 480px; 
+       }
+
+}
+@media (max-width: 1000px) {
+
+      iframe {
+            width: 720px;
+       }
+
+}
+</style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FHBHBPNBQX"></script>
 <script>
