@@ -5,6 +5,11 @@
  text-align: center;  
  font-family: Spartan;
 }
+.h1-gamess {
+ font-size: 60px; 
+ text-align: center;  
+ font-family: Spartan;
+}
 .h1-title {
 height: 855px;
 font-family: 'Spartan', sans-serif;
@@ -27,7 +32,7 @@ margin: 0px;
 font-size: 45px;
 color: white;
 height: 855px;
-background-image: url(../img/h1background.webp);
+background-image: url(../img/xmas.jpg);
 }
 
 .title h1 {
@@ -64,15 +69,16 @@ a {
   color: #008037;
       }  
 .dmbutton button{
-height: 50px;
-width: 300px;
-background-image: linear-gradient(to bottom right, #0fcf62, #163fd4);
+height: 25px;
+width: 100px;
 font-family: 'Spartan',
 sans-serif;
-margin-top: 15px;
-color: black;
+position: fixed;
+  bottom: 0;
+  right: 0;
 }
 .contact {
   font-family: spartan;
   font-size: 60px;
 }
+
