@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Minesweeper | 3kh0</title>
+	<link rel="shortcut icon" href="https://3kh0.github.io/minesweeper/favicon.ico">
+	<link rel="stylesheet" href="https://3kh0.github.io/minesweeper/minesweeper.min.css" />
+	<script src="https://3kh0.github.io/minesweeper/jquerymain.min.js"></script>
+	<script src="https://3kh0.github.io/minesweeper/minesweeper.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98DP5VKS42"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-98DP5VKS42");
+</script>
+	<script>
+	if (window.top != window.self) {
+		window.top.location = 'http://cdn.discourse.org/uploads/meta_discourse/2000/d326c07d2188da9e.gif';
+	}
+
+	$(function() {
+		var gameType = 'expert';
+		var zoom = '100';
+		var position = 'center';
+		var isNightMode = false;
+		var hashParts, i;
+		var minesweeper;
+
+		if (!!location.hash && location.hash.length > 1) {
+			hashParts = location.hash.substring(1).split('-');
+
+			for (i = 0; i < hashParts.length; i++) {
+				switch (hashParts[i]) {
+					case 'beginner':     gameType = 'beginner';     break;
+					case 'intermediate': gameType = 'intermediate'; break;
+					case '150':          zoom = '150';              break;
+					case '200':          zoom = '200';              break;
+					case 'left':         position = 'left';         break;
+					case 'night':        isNightMode = true;        break;
+				}
+			}
+		}
+
+		$('#' + gameType).attr('checked', true);
+		$('#zoom' + zoom).attr('checked', true);
+		$('#position-' + position).attr('checked', true);
+		$('#nightMode').attr('checked', isNightMode);
+
+		document.getElementById('game-container').className = 'z' + zoom;
+		setPosition(position);
+
+		if (isNightMode) {
+			toggleNightMode(isNightMode);
+		}
+
+		minesweeper = new Minesweeper([
+			[ 3, 18, 62],
+			[ 2, 16, 56],
+			[ 1, 14, 51],
+			[ 1, 10, 45]
+		], getOptions, setOptions);
+
+		minesweeper.onWin = function(gameTypeId, time) {
+			var mode;
+			switch (gameTypeId) {
+				case 1: mode = 'Beginner'; break;
+				case 2: mode = 'Intermediate'; break;
+				case 3: mode = 'Expert'; break;
+				default: return;
+			}
+
+			var tweet = 'I just beat #MinesweeperOnline in ' + time + ' second' + (time === 1 ? '' : 's') + ' on ' + mode + ' mode!';
+			$('#share-twitter').attr('href', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweet)
+				+ '&url=' + encodeURIComponent('https://minesweeperonline.com') + '&hashtags=MinesweeperOnline');
+
+			var fbSummary = tweet.replace('#MinesweeperOnline', 'Minesweeper Online');
+			$('#share-facebook').attr('href', 'https://www.facebook.com/sharer/sharer.php'
+				+ '?u=' + encodeURIComponent('https://minesweeperonline.com')
+				+ '&quote=' + encodeURIComponent(fbSummary)
+				+ '&hashtag=' + encodeURIComponent('#MinesweeperOnline'));
+
+			$('#share-text').text(tweet + ' https://minesweeperonline.com');
+			$('#share').fadeIn();
+		};
+
+		minesweeper.onNewHighScore = function(intervalTypeId) {
+			$('#scores-panes').load('scores-panes.php?interval=' + intervalTypeId + '&r=' + Math.random());
+			if (intervalTypeId === 1) $('#daily-link').click();
+			if (intervalTypeId === 2) $('#weekly-link').click();
+			if (intervalTypeId === 3) $('#monthly-link').click();
+			if (intervalTypeId === 4) $('#alltime-link').click();
+		};
+
+		minesweeper.newGame();
+		setHash();
+
+		$("#options-link, #options-close").click(function() {
+			$("#options").toggle();
+			$("#display").hide();
+			$("#controls").hide();
+			$("#import").hide();
+			$("#export").hide();
+		});
+
+		$("#options-form").submit(function(e) {
+			$("#options").hide();
+			minesweeper.newGame();
+			setHash();
+			e.preventDefault();
+		});
+
+		$("#display-link, #display-close").click(function() {
+			$("#options").hide();
+			$("#display").toggle();
+			$("#controls").hide();
+			$("#import").hide();
+			$("#export").hide();
+		});
+
+		$('input[name="zoom"]').change(function() {
+			var zoom = parseFloat($(this).val());
+			minesweeper.resize(zoom);
+			setHash();
+		});
+
+		$('input[name="position"]').change(function() {
+			setPosition($(this).val());
+			setHash();
+		});
+
+		$('input[name="nightMode"]').change(function() {
+			var isNightMode = $(this).is(':checked');
+			toggleNightMode(isNightMode);
+			setHash();
+		});
+
+		$("#controls-link, #controls-close").click(function() {
+			$("#options").hide();
+			$("#display").hide();
+			$("#controls").toggle();
+			$("#import").hide();
+			$("#export").hide();
+		});
+
+		$("#import-link, #import-close").click(function() {
+			$("#options").hide();
+			$("#display").hide();
+			$("#controls").hide();
+			$("#import").toggle();
+			$("#export").hide();
+
+			if ($('#import').is(':visible')) {
+				$('#import input[type=submit]').prop('disabled', true);
+				// trigger propertychange so "load game" button becomes enabled/disabled as needed
+				$('#import textarea').select().trigger('propertychange');
+			}
+		});
+
+		$('#import textarea').bind('input propertychange', function() {
+			var isImportable = minesweeper.isImportable($.trim($(this).val()));
+			$('#import input[type=submit]').prop('disabled', !isImportable);
+		});
+
+		$("#import-form").submit(function(e) {
+			$("#import").hide();
+			minesweeper.import_($.trim($('#import textarea').val()));
+			e.preventDefault();
+		});
+
+		$("#export-link, #export-close").click(function() {
+			$("#options").hide();
+			$("#display").hide();
+			$("#controls").hide();
+			$("#import").hide();
+			$("#export").toggle();
+
+			if ($('#export').is(':visible')) {
+				$('#export textarea').val(minesweeper.export_()).select();
+				var didCopySucceed = document.execCommand('copy');
+				$('#export-message').text(didCopySucceed ? 'Game state copied to your clipboard!' : 'Copy game state to your clipboard:');
+				$('#export-first-click-message').toggle(!minesweeper.hasStartedPlaying());
+			}
+		});
+
+		$('#export textarea').mousedown(function () {
+			// If the textarea already has focus, don't override default behavior.
+			if (document.activeElement === $(this)[0]) {
+				return;
+			}
+			// Defer or else the ensuing click event will un-highlight.
+			var that = this;
+			setTimeout(() => {
+				$(that).select();	
+			}, 0);
+		});
+
+		$(document).keydown(function(e) {
+			if (e.keyCode == 27) { //escape
+				$("#options, #display, #controls, #import, #export").hide();
+			}
+		});
+
+		$(".scores-tab").click(function() {
+			var id = this.id;
+			$(".scores-tab-selected").removeClass("scores-tab-selected");
+			$(this).addClass("scores-tab-selected");
+			$(".scores-pane").hide();
+			$("#" + id.substring(0, id.length - 5)).show();
+		});
+
+		$('#share-close').click(function() {
+			$('#share').fadeOut();
+		});
+
+		$('#share-twitter, #share-facebook').click(function(e) {
+			//https://dev.twitter.com/docs/intents
+			var width = 550;
+			var height = 420;
+			var winWidth = screen.width;
+			var winHeight = screen.height;
+			var left = Math.round((winWidth / 2) - (width / 2));
+			var top = 0;
+			if (winHeight > height) {
+				top = Math.round((winHeight / 2) - (height / 2));
+			}
+			window.open($(this).attr('href'), 'share', 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+			e.preventDefault();
+		});
+
+		function setPosition(position) {
+			if (position == 'left') {
+				$('.outer-container').css('text-align', 'left' );
+				$('body').css('margin-left', '20px');
+			}
+			else if (position == 'center') {
+				$('.outer-container').css('text-align', 'center');
+				$('body').css('margin-left', '0px');
+			}
+		}
+
+		function toggleNightMode(isOn) {
+			$('body').toggleClass('night-mode', isOn);
+		}
+
+		function getOptions() {
+			var gameTypeId;
+			var numRows;
+			var numCols;
+			var numMines;
+			var zoom;
+
+			if ($("#beginner").attr("checked")) {
+				gameTypeId = 1;
+				numRows = 9;
+				numCols = 9;
+				numMines = 10;
+			}
+			else if ($("#intermediate").attr("checked")) {
+				gameTypeId = 2;
+				numRows = 16;
+				numCols = 16;
+				numMines = 40;
+			}
+			else if ($("#expert").attr("checked")) {
+				gameTypeId = 3;
+				numRows = 16;
+				numCols = 30;
+				numMines = 99;
+			}
+			else if ($("#custom").attr("checked")) {
+				gameTypeId = 0;
+
+				numRows = parseInt($("#custom_height").val(), 10);
+				if (isNaN(numRows)) {
+					numRows = 20;
+				}
+				numRows = Math.max(1, numRows);
+				numRows = Math.min(99, numRows);
+				$("#custom_height").val(numRows);
+
+				numCols = parseInt($("#custom_width").val(), 10);
+				if (isNaN(numCols)) {
+					numCols = 30;
+				}
+				numCols = Math.max(8, numCols);
+				numCols = Math.min(99, numCols);
+				$("#custom_width").val(numCols);
+
+				numMines = parseInt($("#custom_mines").val(), 10);
+				if (isNaN(numMines)) {
+					numMines = Math.round(numRows * numCols / 5);
+				}
+				numMines = Math.max(0, numMines);
+				numMines = Math.min(numRows * numCols - 1, numMines);
+				$("#custom_mines").val(numMines);
+			}
+
+			zoom = parseFloat($('input[name="zoom"]:checked').val());
+
+			return {
+				gameTypeId: gameTypeId,
+				numRows: numRows,
+				numCols: numCols,
+				numMines: numMines,
+				zoom: zoom
+			};
+		}
+
+		function setOptions(options) {
+			switch (options.gameTypeId) {
+				case 1: $('#beginner').prop('checked', true); break;
+				case 2: $('#intermediate').prop('checked', true); break;
+				case 3: $('#expert').prop('checked', true); break;
+				default:
+					$('#custom').prop('checked', true);
+					$('#custom_height').val(options.numRows);
+					$('#custom_width').val(options.numCols);
+					$('#custom_mines').val(options.numMines);
+					break;
+			}
+		}
+
+		function setHash() {
+			var gameType = 'expert';
+			var zoom = $('input[name="zoom"]:checked').val();
+			var position = $('input[name="position"]:checked').val();
+			var isNightMode = $('input[name="nightMode"]').is(':checked');
+			var hashParts = [];
+
+			if ($("#beginner").attr("checked")) {
+				hashParts.push("beginner");
+			}
+			else if ($("#intermediate").attr("checked")) {
+				hashParts.push("intermediate");
+			}
+
+			if (zoom != 1) {
+				hashParts.push(zoom * 100);
+			}
+
+			if (position != "center") {
+				hashParts.push(position);
+			}
+
+			if (isNightMode) {
+				hashParts.push('night');
+			}
+
+			if (hashParts.length > 0) {
+				location.hash = '#' + hashParts.join('-');
+			}
+			else {
+				location.hash = '';
+			}
+		}
+	});
+	</script>
+	<script type="application/javascript" src="/js/lib.js"></script>
+</head>
+
+<body onload="check();">
+	<h1 class="ess-ee-oh">Minesweeper Online</h1>
+	<h2 class="ess-ee-oh">Play Free Online Minesweeper in JavaScript</h2>
+	<h3 class="ess-ee-oh">Play the classic game in Beginner, Intermediate, and Expert modes. It's the perfect way to play on a Mac!</h3>
+	<p class="ess-ee-oh">How to play: Click in the minefield to expose a free space. Numbers show how many mines are adjacent to that square. Right-click to flag a square as a mine. Win by exposing all the non-mine squares.</p>
+
+	<table cellpadding="0" cellspacing="0" width="100%" height="100%"><tr><td class="outer-container"><div class="inner-container" style="margin-left: auto; margin-right: auto;">
+	</div>
+
+	<div id="center-column">
+		<div id="game-container" class="z100">
+			<div style="white-space: nowrap;">
+				<span id="options-link" title="game options">Game</span>
+				| <span id="display-link" title="size/position">Display</span>
+				| <span id="controls-link" title="keyboard/mouse controls">Controls</span> 
+				| <span id="import-link" title="load exported game">Import</span> 
+				| <span id="export-link" title="same game to be impoorted">Export</span>
+			</div>
+			<div id="game" oncontextmenu="return false;" ondrag="return false;" ondragstart="return false;"></div>
+
+			<form id="options-form">
+				<table cellspacing="0" cellpadding="2" id="options" class="dialog">
+					<tr class="dialog-title">
+						<td style="padding: 3px;">Game</td>
+						<td colspan="3" style="padding: 3px; text-align: right;">
+							<span id="options-close" class="dialog-close" title="close this box">&times;</span>
+						</td>
+					</tr>
+					<tr class="dialog-bar">
+						<td></td>
+						<td>Height</td>
+						<td>Width</td>
+						<td>Mines</td>
+					</tr>
+					<tr>
+						<td><label><input type="radio" name="field" id="beginner" /> <strong>Beginner</strong></label></td>
+						<td>9</td>
+						<td>9</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td><label><input type="radio" name="field" id="intermediate" /> <strong>Intermediate</strong></label></td>
+						<td>16</td>
+						<td>16</td>
+						<td>40</td>
+					</tr>
+					<tr>
+						<td><label><input type="radio" name="field" checked="checked" id="expert" /> <strong>Expert</strong></label></td>
+						<td>16</td>
+						<td>30</td>
+						<td>99</td>
+					</tr>
+					<tr>
+						<td><label><input type="radio" name="field" id="custom" /> Custom</label></td>
+						<td><input type="text" value="20" id="custom_height" class="dialog-text-input" onfocus="$('#custom').attr('checked', true);" /></td>
+						<td><input type="text" value="30" id="custom_width" class="dialog-text-input" onfocus="$('#custom').attr('checked', true);" /></td>
+						<td><input type="text" value="145" id="custom_mines" class="dialog-text-input" onfocus="$('#custom').attr('checked', true);" /></td>
+					</tr>
+					<tr class="dialog-bar">
+						<td><input type="submit" value="New Game" class="dialogText" style="vertical-align: middle;" /></td>
+						<td colspan="3">
+							<label style="margin-bottom: 0;"><input type="checkbox" id="marks" /> Marks (?)</label>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<table cellspacing="0" cellpadding="2" id="display" class="dialog">
+				<tr class="dialog-title">
+					<td>Display</td>
+					<td style="text-align: right;">
+						<span id="display-close" class="dialog-close" title="close this box">&times;</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 6px;"><strong>Zoom</strong></td>
+					<td style="padding: 6px;">
+						<label><input type="radio" name="zoom" id="zoom100" value="1" checked="checked"/> 100%</label><br />
+						<label><input type="radio" name="zoom" id="zoom150" value="1.5" /> 150%</label><br />
+						<label><input type="radio" name="zoom" id="zoom200" value="2" /> 200%</label>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 6px; border-top: 1px solid #AAA;"><strong>Position</strong></td>
+					<td style="padding: 6px; border-top: 1px solid #AAA;">
+						<label><input type="radio" name="position" id="position-center" value="center" /> Center</label><br />
+						<label><input type="radio" name="position" id="position-left" value="left" checked="checked" /> Left</label>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 6px; border-top: 1px solid #AAA;"><label for="nightMode"><strong>Night Mode</strong></label></td>
+					<td style="padding: 6px; border-top: 1px solid #AAA;">
+						<input type="checkbox" name="nightMode" id="nightMode" />
+					</td>
+				</tr>
+			</table>
+
+			<table cellspacing="0" cellpadding="2" id="controls" class="dialog">
+				<tr class="dialog-title">
+					<td>Controls</td>
+					<td style="text-align: right;">
+						<span id="controls-close" class="dialog-close" title="close this box">&times;</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 6px;"><strong>Desktop</strong></td>
+					<td style="padding: 6px;">
+						<ul>
+							<li><b>Left-click</b> an empty square to reveal it.</li>
+							<li><b>Right-click</b> (or <b>Ctrl+click</b>) an empty square to flag it.</li>
+							<li><b>Midde-click</b> (or <b>left+right click</b>) a number to reveal<br /> its adjacent squares.</li>
+							<li>Press <b>space</b> bar while hovering over a square to flag<br />it or reveal its adjacent squares.</li>
+							<li>Press <b>F2</b> or click the smiley face to start a new game.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 6px; border-top: 1px solid #AAA;"><strong>Mobile</strong></td>
+					<td style="padding: 6px; border-top: 1px solid #AAA;">
+						<ul>
+							<li><b>Tap</b> an empty square to reveal it.</li>
+							<li><b>Long-press</b> an empty square to flag it.</li>
+							<li><b>Tap</b> a number to reveal its adjacent squares.</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+
+			<form id="import-form">
+				<table cellspacing="0" cellpadding="2" id="import" class="dialog">
+					<tr class="dialog-title">
+						<td>Import</td>
+						<td style="text-align: right;">
+							<span id="import-close" class="dialog-close" title="close this box">&times;</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							Paste exported game state:
+							<br />
+							<textarea style="width: 240px; height: 40px; margin-top: 4px;"></textarea>
+						</td>
+					</tr>
+					<tr class="dialog-bar">
+						<td colspan="2">
+							<input type="submit" value="Load Game" />
+						</td>
+					</tr>
+				</table>
+			</form>
+
+			<table cellspacing="0" cellpadding="2" id="export" class="dialog">
+				<tr class="dialog-title">
+					<td>Export</td>
+					<td style="text-align: right;">
+						<span id="export-close" class="dialog-close" title="close this box">&times;</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<em id="export-message"></em>
+						<br />
+						<textarea style="width: 240px; height: 40px; margin-top: 4px;"></textarea>
+						<div id="export-first-click-message" style="width: 240px; margin-top: 4px; white-space: normal;">
+							&#9432; &ldquo;First click cannot be a mine&rdquo; behavior has been disabled for this game, as a result of having clicked &ldquo;Export&rdquo;.
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	Made by <a target="_blank" href="http://3kh0.github.io">3kh0 </a></div>
+	</div>
+	<!-- preload this image -->
+	<img src="flag.png" style="display: none;"/>
+	</div></table>
+</body>
+</html>
