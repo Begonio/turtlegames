@@ -115,7 +115,7 @@ header {
 
 .home-intro {
   padding: 5vh 0;
-  background: rgba(17, 34, 51, 0.48) url(//unsplash.it/900);
+  background: rgba(17, 34, 51, 0.48);
   background-size: cover;
   background-blend-mode: multiply;
   color: white;

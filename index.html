@@ -1,19 +1,14 @@
   <!DOCTYPE html>
 <html>
 <head>
-  
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:300,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/main.css" />
+<link rel="icon" href="../img/favicon.ico">
+<link rel="stylesheet" href="../css/main.css" />
 <title>Turtle Games</title>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="../style.css">
-<script src="Script.js" defer></script>
+<link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FHBHBPNBQX"></script>
@@ -27,9 +22,9 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5417572481469038"
      crossorigin="anonymous"></script> 
 </head>
-<div class="topnav" id="myTopnav"> 
+<div class="topnav" id="myTopnav imgRand"> 
  <header class="header-area">
-      <a  class="site-logo brand" aria-label="homepage">Turtle Games</a>
+      <a class="site-logo brand" aria-label="homepage">Turtle Games</a>
       <nav class="main-nav">
         <ul class="nav__list">
           <li class="nav__list-item"><a href="#main-title" class="nav__link">Home</a></li>
@@ -45,10 +40,10 @@
           <li class="nav__list-item"><a href="#sports" class="nav__link">Sports</a></li>
         </ul>
       </nav>
-      <nav class="account">
+      <nav>
         <ul class="nav__list">
           <li class="nav__list-item">
-            <a onclick="themeToggle()" class="nav__link nav__link--btn">Change Theme</a>
+            <a id="change-image" onclick="themeToggle(); changeBackground();" class="nav__link nav__link--btn">Change Theme</a>
           </li>
         </ul>
       </nav>
@@ -66,9 +61,8 @@
 
  <h1 class="h1-gamess">Game Genres</h1>
 
-<h1 id="action" class="h1-games">Action</h1>
-
-
+<h1 id="action" class="h1-games"></h1>
+<h1 class="h1-games">Action</h1>
 <div class="item">
           <a href="../game/supermario">
             <img loading="lazy" src="../img/mario.webp"/>
@@ -87,7 +81,6 @@
     <span class="caption">Five Nights at Freddy's</span> 
   </a> 
 </div>
-
  <div class="item">
           <a href="../game/HappyWheels">
             <img loading="lazy" src="../img/HappyWheels.webp"/>
@@ -150,6 +143,7 @@
     </a>
   </div>
 
+    <h1 id="sports" class="h1-games"></h1>
     <h1 id="sports" class="h1-games">Sports</h1>
 
     <div class="item">
@@ -213,7 +207,8 @@
     </a>
   </div>
 
-<h1 id="runners" class="h1-games">Runners</h1>
+<h1 id="runners" class="h1-games"></h1>
+<h1 class="h1-games">Runners</h1>
 
  <div class="item">
     <a href="../game/subway">
@@ -270,7 +265,8 @@
     </a>
   </div>
 
-  <h1 id="survival" class="h1-games">Survival</h1>
+  <h1 id="survival" class="h1-games"></h1>
+  <h1 class="h1-games">Survival</h1>
 
 <body style="text-align: center; font-size: 21px; font-family: Roboto Condensed">
 
@@ -306,7 +302,8 @@
     </A>
     </div>
 
-   <h1 id="shooters" class="h1-games">Shooters</h1>
+   <h1 id="shooters" class="h1-games"></h1>
+   <h1 class="h1-games">Shooters</h1>
 
     <div class="item">
     <a href="../game/1v1.lol/">
@@ -327,6 +324,7 @@
       </A>
     </div>
 
+   <h1 class="h1-games"></h1>
    <h1 id="strategy" class="h1-games">Strategy</h1>
 
     <div class="item">
@@ -384,7 +382,8 @@
     </a>
   </div>d
 
-<h1 id="racing" class="h1-games">Racing</h1>
+<h1 id="racing" class="h1-games"></h1>
+<h1 class="h1-games">Racing</h1>
 
      <div class="item">
     <a href="../game/Motox3m">
@@ -430,7 +429,8 @@
 </div>
 
   
-  <h1 id="clickers" class="h1-games">Clickers</h1>
+  <h1 id="clickers" class="h1-games"></h1>
+  <h1 class="h1-games">Clickers</h1>
 
  <div class="item">
   <a href="../game/dogeminer">
@@ -467,12 +467,11 @@
 
      <h1 id="contact" class="contact">Contact</h1>
      <p style="font-size: 30px;">Email <a href="mailto:help@turtlegames.org">help@turtlegames.org</a>.</p>
-   
-      <p style="font-size: 30px;">Comments have moved to <a href="https://icomments.pages.dev">icomments.pages.dev</a>.</p>
 
 <h3>Powered by <a class="poweredby-a" href="https://pirategamesstudio.github.io"">Pirate Games Studio</a></h3>
       </body>
 <script src="../js/observers.js"></script>
+<script src="../js/Script.js" defer></script>
 <style>
 /* customizable snowflake styling */
 .snowflake {
@@ -522,4 +521,7 @@
     ❆
   </div>
 </div>
+<script>
+  ChangeIt();
+</script>
 </html>
