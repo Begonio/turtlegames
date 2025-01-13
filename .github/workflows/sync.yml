@@ -1,0 +1,100 @@
+name: Sync Changes to Other Repos
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+
+      - name: Configure git
+        run: |
+          git config --global user.name "Begonio"
+          git config --global user.email "begonio@pm.me"
+
+      - name: Sync to turtlemath
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/turtlemath.git
+          rsync -a --exclude '.git' ./ turtlemath/
+          cd turtlemath
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to lausd
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/lausd.git
+          rsync -a --exclude '.git' ./ lausd/
+          cd lausd
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to turtle
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/turtle.git
+          rsync -a --exclude '.git' ./ turtle/
+          cd turtle
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to npc
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/npc.git
+          rsync -a --exclude '.git' ./ npc/
+          cd npc
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to meth
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/meth.git
+          rsync -a --exclude '.git' ./ meth/
+          cd meth
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to methgames
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/methgames.git
+          rsync -a --exclude '.git' ./ methgames/
+          cd methgames
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to cobratate
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/cobratate.git
+          rsync -a --exclude '.git' ./ cobratate/
+          cd cobratate
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to turtlemathgames
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/turtlemathgames.git
+          rsync -a --exclude '.git' ./ turtlemathgames/
+          cd turtlemathgames
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
+
+      - name: Sync to turtlegames.club
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Begonio/turtlegames.club.git
+          rsync -a --exclude '.git' ./ turtlegames.club/
+          cd turtlegames.club
+          git add .
+          git commit -m "Update from turtlegames" || echo "No changes to commit"
+          git push origin main
