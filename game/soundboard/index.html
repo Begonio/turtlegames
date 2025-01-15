@@ -123,6 +123,7 @@ div.control {
  // functions for audio control menu
 function playAll() {
   document.getElementById('fart').play()
+  document.getElementById('high').play()
   document.getElementById('fart-with-reverb').play()
   document.getElementById('sloppy-fart').play()
   document.getElementById('bruh').play()
@@ -170,6 +171,7 @@ function playAll() {
 }
 function stopAll() {
   document.getElementById('fart').load()
+  document.getElementById('high').load()
   document.getElementById('fart-with-reverb').load()
   document.getElementById('sloppy-fart').load()
   document.getElementById('bruh').load()
@@ -246,6 +248,18 @@ Audio Controls
        </p>
   </div>
  </div>
+
+<div>
+  <div class="sound">
+    <div class="circle small-button-background" style="background-color:#296967;"></div>
+    <audio id="high" src="sounds/high.mp3" preload="auto"></audio>
+    <button class="small-button" onclick="document.getElementById('high').play();"></button>
+    <div class="small-button-shadow"></div>
+    <p class="name"><button onclick="window.location.href='sounds/high.mp3'">Download</button><br>
+       Dog Whistle<br>
+    </p>
+  </div>
+</div>
 
  <div>
   <div class="sound">
