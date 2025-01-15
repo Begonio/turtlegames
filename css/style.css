@@ -15,7 +15,7 @@
 /* Main title text */
 .h1-title {
 height: 855px;
-font-family: 'Spartan', sans-serif;
+font-family: 'Usurp';
 margin: 0px;
 }
 /* Powered by pirate games text at bottom */
@@ -37,12 +37,12 @@ body {
 background-size: cover;
 margin: 0px;
 font-size: 45px;
-color: white;
+color: #FAF9F6;
 height: 855px;  
-background-image: url(../img/bc/IMG_5.jpg);
+background-image: url(../img/BK/BKGRD_IMG_3.png);
 
 }
-/* maun Title text */
+/* main Title text */
 .title h1 {
 transform: translateZ(.25px) scale(.75);
 transform-origin: 50% 100%;

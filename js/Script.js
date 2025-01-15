@@ -53,12 +53,3 @@ $(document).ready(function(){
         $(".site-nav-menu").toggleClass("mobile-menu");
     });
  });
-
-let count = 1;
-document.querySelector('#change-image').addEventListener('click', evt => {
-  count += 1;
-  let url = 'url("../img/bs/IMG_' + count + '.jpg")';
-})
-function changeBackground() {
-  element.style.backgroundImage = url
-}

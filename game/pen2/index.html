@@ -1,41 +1,121 @@
-<!--Full screen on ios-->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>Penalty Shooters 2</title>
-<iframe src="https://html5.gamedistribution.com/571b9df027e449f78e3869ba19658754/?gd_sdk_referrer_url=https://penaltyshooters2.com"
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0" 
-    width="100%" 
-    height="100%" 
-    scrolling="auto"></iframe >
-<style>
-    html 
-{
- overflow: auto;
-}
- 
-html, body, div, iframe 
-{
- margin: 0px; 
- padding: 0px; 
- height: 100%; 
- border: none;
-}
-iframe 
-{
- display: block; 
- width: 100%; 
- border: none; 
- overflow-y: auto; 
- overflow-x: hidden;
-}
-</style>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FHBHBPNBQX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!DOCTYPE html><html><head>
+        <title>PENALTY CHALLENGE</title>
+        <link rel="stylesheet" href="css/reset.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" type="text/css">
+        <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
+        <link rel="stylesheet" href="css/ios_fullscreen.css" type="text/css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900&subset=cyrillic,cyrillic-ext" rel="stylesheet">
+        
 
-  gtag('config', 'G-FHBHBPNBQX');
-</script>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui">
+        <meta name="msapplication-tap-highlight" content="no">
+
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/easeljs-NEXT.min.js"></script>
+        <script type="text/javascript" src="js/howler.min.js"></script>
+        <script type="text/javascript" src="js/Three.js"></script>
+        <script type="text/javascript" src="js/CHelpText.js"></script>
+        
+        
+   
+
+        <script type="text/javascript" src="js/main.js"></script>
+
+    </head>
+    <body ondragstart="return false;" ondrop="return false;">
+        <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+        <script>
+            $(document).ready(function () {
+                var oMain = new CMain({
+                    area_goal: [{id: 0, probability: 100},  {id: 1, probability: 80}, {id: 2, probability: 60}, {id: 3, probability: 80},   {id: 4, probability: 100}, 
+                                {id: 5, probability: 75},   {id: 6, probability: 60}, {id: 7, probability: 50}, {id: 8, probability: 60},   {id: 9, probability: 75}, 
+                                {id: 10, probability: 80},  {id: 11, probability: 65},{id: 12, probability: 70},{id: 13, probability: 65},  {id: 14, probability: 80}], 
+                    ////PROBABILITY AREA GOALS START TO LEFT UP TO RIGHT DOWN 
+                    //0 1 2 3 4
+                    //5 6 7 8 9
+                    //10 11 12 13 14
+                  
+
+                    score_goal:10,
+                    score_goal_missed:-5,
+                    score_ball_saved: 5, //ADD SCORE WHEN THE GLOVES SAVE BALL
+                    score_goal_opponent: -5, // ADD SCORE WHEN THE OPPONENT GOAL
+                    audio_enable_on_startup:false, //ENABLE/DISABLE AUDIO WHEN GAME STARTS 
+                    check_orientation:true, //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
+                    fullscreen: true //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
+                });
+
+                $(oMain).on("start_session", function (evt) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeStartSession();
+                    }
+                });
+
+                $(oMain).on("end_session", function (evt) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeEndSession();
+                    }
+                });
+
+                $(oMain).on("start_level", function (evt, iLevel) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeStartLevel({level: iLevel});
+                    }
+                });
+
+                $(oMain).on("restart_level", function (evt, iLevel) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeRestartLevel({level: iLevel});
+                    }
+                });
+
+                $(oMain).on("end_level", function (evt, iLevel) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeEndLevel({level: iLevel});
+                    }
+                });
+
+                $(oMain).on("save_score", function (evt, iScore, szMode) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeSaveScore({score: iScore, mode: szMode});
+                    }
+                });
+
+                $(oMain).on("show_interlevel_ad", function (evt) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeShowInterlevelAD();
+                    }
+                });
+
+                $(oMain).on("share_event", function (evt, iScore) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeShareEvent({img: TEXT_SHARE_IMAGE,
+                            title: TEXT_SHARE_TITLE,
+                            msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+                            msg_share: TEXT_SHARE_SHARE1 + iScore + TEXT_SHARE_SHARE1});
+                    }
+                });
+
+                if (isIOS()) {
+                    setTimeout(function () {
+                        sizeHandler();
+                    }, 200);
+                } else {
+                    sizeHandler();
+                }
+            });
+
+        </script>
+        
+        <div class="check-fonts">
+            <p class="check-font-1">TradeGothic</p>
+            <p class="check-font-2">arialbold</p>
+        </div> 
+        
+        <canvas id="canvas" class="ani_hack" width="1280" height="640"> </canvas>
+         <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>
+        <div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+    
+
+</body></html>
