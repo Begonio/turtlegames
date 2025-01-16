@@ -1,41 +1,62 @@
-<!--Full screen on ios-->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>Run 3</title>
-<iframe src="https://tooadvancedforsociety.gq/tam-run3/"
-frameborder="0" 
-marginheight="0" 
-marginwidth="0" 
-width="100%" 
-height="100%" 
-scrolling="auto"></iframe >
-<style>
-html 
-{
-overflow: auto;
-}
 
-html, body, div, iframe 
-{
-margin: 0px; 
-padding: 0px; 
-height: 100%; 
-border: none;
-}
-iframe 
-{
-display: block; 
-width: 100%; 
-border: none; 
-overflow-y: auto; 
-overflow-x: hidden;
-}
-</style>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FHBHBPNBQX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Run 3</title>
+	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MENBM6GSNY"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-MENBM6GSNY")</script>
+	<script type="text/javascript" src="./Run3.js"></script>
+	<script>
+		window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, { capture: false, passive: false });
+		if (typeof window.devicePixelRatio !='undefined' && window.devicePixelRatio > 2) {
+			var meta = document.getElementById ("viewport");
+			meta.setAttribute ('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
+		}
+	</script>
+	<style>
+		html,body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+		#openfl-content { background: #000000; width: 100%; height: 100%; }
+		@font-face {
+			font-family: 'Comfortaa Bold';
+			src: url('font/COMFORTAA-BOLD.eot?#iefix') format('embedded-opentype'),
+			url('font/COMFORTAA-BOLD.woff') format('woff'),
+			url('font/COMFORTAA-BOLD.TTF') format('truetype'),
+			url('font/COMFORTAA-BOLD.svg#Comfortaa%20Bold') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Comfortaa';
+			src: url('font/Comfortaa.eot?#iefix') format('embedded-opentype'),
+			url('font/Comfortaa.woff') format('woff'),
+			url('font/Comfortaa.otf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Permanent Marker';
+			src: url('font/PERMANENTMARKER.eot?#iefix') format('embedded-opentype'),
+			url('font/PERMANENTMARKER.woff') format('woff'),
+			url('font/PERMANENTMARKER.TTF') format('truetype'),
+			url('font/PERMANENTMARKER.svg#Permanent%20Marker') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
 
-  gtag('config', 'G-FHBHBPNBQX');
-</script>
+	</style>
+	
+</head>
+<body>
+	
+	<noscript>This webpage makes extensive use of JavaScript. Please enable JavaScript in your web browser to view this page.</noscript>
+	
+	<div id="openfl-content"></div>
+	
+	<script type="text/javascript">
+		lime.embed ("Run3", "openfl-content", 800, 600, { parameters: {} });
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/st39/sdk@main/api.js"></script>
+</body>
+</html>
