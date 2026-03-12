@@ -1,26 +1,19 @@
-const header = document.querySelector("header");
-const sectionOne = document.querySelector(".home-intro");
+/* ============================================================
+   TURTLE GAMES – SCROLL OBSERVERS
+   ============================================================ */
 
-const sectionOneOptions = {
-  rootMargin: "-200px 0px 0px 0px"
-};
+// ── NAV SCROLL EFFECT ────────────────────────────────────────
+(function initScrollObserver() {
+  const header  = document.getElementById('site-header');
+  const hero    = document.getElementById('hero');
+  if (!header || !hero) return;
 
-const sectionOneObserver = new IntersectionObserver(function(
-  entries,
-  sectionOneObserver
-) {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) {
-      header.classList.add("nav-scrolled");
-    } else {
-      header.classList.remove("nav-scrolled");
-    }
-  });
-},
-sectionOneOptions);
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      header.classList.toggle('scrolled', !entry.isIntersecting);
+    },
+    { rootMargin: '-80px 0px 0px 0px' }
+  );
 
-sectionOneObserver.observe(sectionOne);
-
-function toggleMobileMenu(menu) {
-    menu.classList.toggle('open');
-}
+  observer.observe(hero);
+})();
